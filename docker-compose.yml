@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+
+    new_web:
+       build: ./App
+       ports: 
+           - "3333:80"
+       volumes:
+          - ./App/static:/var/www/html/static
+          - ./App/SRC:/var/www/html/SRC
+          - ./App/router:/var/www/html/router
+          - ./App/Controllers:/var/www/html/Controllers
+          - ./App/index.php:/var/www/html/index.php
+          - ./config:/var/www/config
+          - ./cert:/var/www/cert
+       container_name: new_web
+       networks:
+           app_netNewWeb:        
+networks:
+    app_netNewWeb:
+        ipam:
+            driver: default
+            config:
+                - subnet: "172.16.233.0/24"
